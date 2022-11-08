@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "ignorePatterns": ["webpack.*.js"],
+  "rules": {
+    "no-console": 1,
+    "no-extra-boolean-cast": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "react/react-in-jsx-scope": "off",
+    "eqeqeq": 2
+  }
+}

@@ -1,0 +1,66 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.control-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+#change-email-form {
+  width: 60%;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.input-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  margin-right: 2em;
+  transform: translateY(3.5px);
+}
+
+#change-email-form button {
+  width: 30%;
+  margin: 0;
+}
+
+#change-email-form input {
+  margin-top: .5em;
+  flex-grow: 1;
+  padding: 1em;
+}
+
+@media screen and (max-width: 800px) {
+  #change-email-form {
+    width: 60%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+  
+  .input-wrapper {
+    margin-right: 0;
+    transform: translateY(0);
+  }
+  
+  #change-email-form button {
+    width: 100%;
+    margin-top: 1em;
+  }
+  
+  #change-email-form input {
+    height: 50px;
+  }
+}
+
+footer {
+  min-height: 1000px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}

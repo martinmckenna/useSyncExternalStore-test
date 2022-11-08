@@ -1,0 +1,13 @@
+node_modules
+dist
+/index.js
+/index.node.js
+.env
+coverage
+hot
+**LICENSE.txt
+log
+*.log
+results
+browserstack.json
+.DS_Store
