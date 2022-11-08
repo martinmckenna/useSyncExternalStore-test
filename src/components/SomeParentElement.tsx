@@ -1,8 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-import StaticComponent from "src/components/StaticComponent";
-
 interface TProps {
   children?: ReactNode;
 }
@@ -21,7 +19,6 @@ export const SomeParentElement: FC<TProps> = ({ children }) => {
     <Wrapper>
       <h2>some parent element</h2>
       {children}
-      <StaticComponent />
     </Wrapper>
   );
 };

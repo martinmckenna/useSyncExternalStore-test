@@ -8,18 +8,24 @@ import {
   useReducer,
 } from "react";
 
-type State = number;
+type State = {
+  total: number;
+  items: number;
+};
 
 type Action = "cart_update";
 
-type ActionWrapper = { type: Action; data: number };
+type ActionWrapper = { type: Action; data: Partial<State> };
 
-const initialState = 0;
+const initialState = { total: 0, items: 0 };
 
 export const reducer: Reducer<State, ActionWrapper> = (state, action) => {
   switch (action.type) {
     case "cart_update":
-      return action.data;
+      return {
+        ...state,
+        ...action.data,
+      };
 
     default:
       return state;

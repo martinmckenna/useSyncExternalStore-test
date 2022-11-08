@@ -1,5 +1,4 @@
-// import { createRoot } from "react-dom/client";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./styles/index.css";
 
 import Home from "src/views/Home";
@@ -17,20 +16,8 @@ const RouteWrapper = styled.div`
 `;
 
 ((): void => {
-  // const root = createRoot(document.getElementById("root"));
-  // return root.render(
-  //   <BrowserRouter>
-  //     <Wrapper>
-  //       <RouteWrapper>
-  //         <Routes>
-  //           <Route path="/" element={<Home />} />
-  //         </Routes>
-  //       </RouteWrapper>
-  //     </Wrapper>
-  //   </BrowserRouter>
-  // );
-
-  ReactDOM.render(
+  const root = createRoot(document.getElementById("root"));
+  return root.render(
     <BrowserRouter>
       <Wrapper>
         <RouteWrapper>
@@ -39,7 +26,6 @@ const RouteWrapper = styled.div`
           </Routes>
         </RouteWrapper>
       </Wrapper>
-    </BrowserRouter>,
-    document.getElementById("root")
+    </BrowserRouter>
   );
 })();
