@@ -4,7 +4,8 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useState,
+  useRef,
+  useSyncExternalStore,
 } from "react";
 
 type State = {
@@ -15,33 +16,54 @@ type State = {
 const initialState = { total: 0, items: 0 };
 
 export interface Context {
-  cartState: State;
-  setCart: (slice: Partial<State>) => void;
+  get: () => State;
+  set: (value: Partial<State>) => void;
+  subscribe: (callback: () => void) => () => void;
 }
 
 export const CartContext = createContext<Context>({
-  cartState: initialState,
-  setCart: () => null,
+  get: () => initialState,
+  set: () => null,
+  subscribe: (callback) => () => callback(),
 });
 
+/* React 18 makes you type children explicitly :( */
 export const CartProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  const [store, updateStore] = useState(initialState);
+  const store = useRef(initialState);
 
-  const setCart = useCallback(
-    (newState: Partial<State>) => {
-      updateStore({
-        ...store,
-        ...newState,
-      });
-    },
-    [store.items, store.total]
-  );
+  const get = useCallback(() => store.current, []);
+
+  const subscribers = useRef(new Set<() => void>());
+
+  const set = useCallback((value: Partial<State>) => {
+    store.current = { ...store.current, ...value };
+    subscribers.current.forEach((callback) => callback());
+  }, []);
+
+  const subscribe = useCallback((callback: () => void) => {
+    subscribers.current.add(callback);
+    return () => subscribers.current.delete(callback);
+  }, []);
 
   return (
-    <CartContext.Provider value={{ cartState: store, setCart }}>
+    <CartContext.Provider value={{ get, set, subscribe }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCart = () => useContext<Context>(CartContext);
+export function useCart<SelectorOutput>(
+  selector: (state: State) => SelectorOutput
+): [SelectorOutput, (value: Partial<State>) => void] {
+  const store = useContext<Context>(CartContext);
+
+  if (!store) {
+    throw new Error("store not found!");
+  }
+
+  const slice = useSyncExternalStore(store.subscribe, () =>
+    selector(store.get())
+  );
+
+  return [slice, store.set];
+}

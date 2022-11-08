@@ -4,10 +4,7 @@ import { useCart } from "src/context/Cart";
 interface TProps {}
 
 export const DynamicComponent: FC<TProps> = () => {
-  const {
-    setCart,
-    cartState: { total: cartTotal },
-  } = useCart();
+  const [cartTotal, setCart] = useCart((state) => state.total);
   return (
     <div>
       <p>{cartTotal}</p>
