@@ -4,12 +4,15 @@ import { useCart } from "src/context/Cart";
 interface TProps {}
 
 export const StaticComponent: FC<TProps> = () => {
-  const [items, updateCart] = useCart((state) => state.items);
+  const {
+    setCart,
+    cartState: { items: cartItems },
+  } = useCart();
   return (
     <div>
-      <p>{items}</p>
-      <button onClick={() => updateCart({ items: items + 1 })}>
-        update cart total
+      <p>{cartItems}</p>
+      <button onClick={() => setCart({ items: cartItems + 1 })}>
+        update cart items
       </button>
     </div>
   );
