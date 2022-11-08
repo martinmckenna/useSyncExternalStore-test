@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import UpdaterComponent from "src/components/UpdaterComponent";
-import ReaderComponent from "src/components/ReaderComponent";
+import TotalUpdater from "src/components/TotalUpdater";
+import ItemsUpdater from "src/components/ItemsUpdater";
 import SomeParentElement from "src/components/SomeParentElement";
 
 import { CartProvider } from "src/context/Cart";
@@ -13,8 +13,8 @@ export const Home: FC<Props> = () => {
     <CartProvider>
       <h1>Context Test App</h1>
       <SomeParentElement>
-        <UpdaterComponent />
-        <ReaderComponent />
+        <TotalUpdater />
+        <ItemsUpdater />
       </SomeParentElement>
     </CartProvider>
   );
