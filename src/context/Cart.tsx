@@ -66,6 +66,7 @@ export function useCart<SelectorOutput>(
   const [state, setState] = useState(selector(store.get()));
 
   useEffect(() => {
+    /* being returned because the subscribe returns the unsub method */
     return store.subscribe(() => setState(selector(store.get())));
   }, []);
 
