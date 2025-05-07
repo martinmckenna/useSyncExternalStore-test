@@ -8,13 +8,6 @@ import {
   useSyncExternalStore,
 } from "react";
 
-// type State = {
-//   total: number;
-//   items: number;
-// };
-
-// const initialState = { total: 0, items: 0 };
-
 export interface Context<State extends any> {
   get: () => State;
   set: (value: Partial<State>) => void;
