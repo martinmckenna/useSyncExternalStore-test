@@ -74,21 +74,3 @@ export const contextFactory = <State extends Record<any, any>>(
 
   return { Provider, useContextState };
 };
-
-{
-  /* export function useCart<SelectorOutput>(
-  selector: (state: State) => SelectorOutput
-): [SelectorOutput, (value: Partial<State>) => void] {
-  const store = useContext<Context>(CartContext);
-
-  if (!store) {
-    throw new Error("store not found!");
-  }
-
-  const slice = useSyncExternalStore(store.subscribe, () =>
-    selector(store.get())
-  );
-
-  return [slice, store.set];
-} */
-}
