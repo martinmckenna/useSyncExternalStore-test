@@ -6,8 +6,6 @@ import {
   useContext,
   useRef,
   useSyncExternalStore,
-  useState,
-  useEffect,
 } from "react";
 
 type State = {
@@ -63,12 +61,9 @@ export function useCart<SelectorOutput>(
     throw new Error("store not found!");
   }
 
-  const [state, setState] = useState(selector(store.get()));
+  const slice = useSyncExternalStore(store.subscribe, () =>
+    selector(store.get())
+  );
 
-  useEffect(() => {
-    /* being returned because the subscribe returns the unsub method */
-    return store.subscribe(() => setState(selector(store.get())));
-  }, []);
-
-  return [state, store.set];
+  return [slice, store.set];
 }
